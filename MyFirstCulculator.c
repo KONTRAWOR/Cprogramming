@@ -28,5 +28,7 @@ int main(){
         c = number * second;
          printf("The result is %d ", c);
     }
+   
  }
+    printf("Your program is finished");
 }
