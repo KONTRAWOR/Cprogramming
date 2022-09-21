@@ -1,0 +1,22 @@
+/*Ввести з клавіатури 6-и значне число. Перевірити чи це число може бути записом числа
+в 5-тірковій системі числення. Якщо так, вивести його значення у 10-вій системі
+числення*/
+#include <stdio.h>
+
+int main() {
+	int x;
+	printf("Please, enter the six digits number: ");
+	scanf("%d", &x); //enter our number;
+
+    
+    int aFewSecondVar, b, c, k;
+    
+    do {
+        aFewSecondVar = x / 5; 
+        b = aFewSecondVar * 5;     // це замість %)
+        c = x - b;
+        printf("%d", c);
+    }
+     while (aFewSecondVar > 4);
+    
+}
