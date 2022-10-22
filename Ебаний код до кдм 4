@@ -1,0 +1,136 @@
+#define _CRT_SECURE_NO_WARNINGS 
+#include <stdio.h>
+#include <math.h>
+
+void printPowerSet(int* array, int length)
+{
+    unsigned int pow_set_size = pow(2, length);
+    int counter, j;
+
+    for (counter = 0; counter < pow_set_size; counter++)
+    {
+        printf("{");
+        for (j = 0; j < length; j++)
+        {
+            if (counter & (1 << j)) {
+                printf("%d", array[j]);
+            }
+        }
+        printf("}, ");
+    }
+}
+
+
+int main() {
+    int a[10] = { 1,1,1,1,1,1,1,0,0,0 };
+    int b[10] = { 0,0,0,0,1,1,1,1,1,1 };
+    int c[10] = { 1,1,1,0,0,0,0,1,1,1 };
+    int a1[10];
+    int b1[10];
+    int b2[10];
+    int b3[10];
+    int c1[10];
+    int c2[10];
+    int c3[10];
+    int c4[10];
+    int k = 0;
+    int m = 0;
+
+    int temp[10], temp1[10], a2[10] = { 1, 2, 3, 4, 5 };
+    for (int i = 0; i < 10; i++) {
+        if (a[i] != b[i] && a[i] != 0) {
+            a1[i] = 1;
+        }
+        else
+            a1[i] = 0;
+    }
+
+    for (int i = 0; i < 10; i++) {
+        if (a1[i] != c[i] && a[i] != 0) {
+            a1[i] = 1;
+        }
+        else
+            a1[i] = 0;
+    }
+
+    printf("A n !B / C: ");
+    for (int i = 0; i < 10; i++)
+        if (a1[i] == 1)
+            printf("%d ", i + 1);
+    printf("\n");
+    /////////////////////////////
+
+    for (int i = 0; i < 10; i++) {
+
+        if (a[i] == 1 || b[i] == 1) {
+            b1[i] = 1;
+        }
+    }
+    for (int i = 0; i < 10; i++) {
+        if (b1[i] == 1 || c[i] == 1) {
+            b2[i] = 1;
+        }
+        if (b1[i] == c[i]) {
+            b2[i] = 0;
+        }
+    }
+    for (int i = 0; i < 10; i++) {
+        if (b2[i] == 0) {
+            b3[i] = 1;
+        }
+        else
+            b3[i] = 0;
+    }
+    printf("!(A U B △ C): ");
+    for (int i = 0; i < 10; i++)
+        if (b3[i] == 1)
+            printf("%d ", i + 1);
+    //////////////////////////////////
+    printf("\n");
+    for (int i = 0; i < 10; i++) {
+        c1[i] = c[i];
+        if (c[i] == a[i]) {
+            c1[i] = 0;
+        }
+    }
+
+    for (int i = 0; i < 10; i++) {
+        c2[i] = a[i];
+        if (a[i] == b[i]) {
+            c2[i] = 0;
+        }
+    }
+
+    for (int i = 0; i < 10; i++) {
+        if (c1[i] == 1 || c2[i] == 1) {
+            c3[i] = 1;
+        }
+    }
+
+    for (int i = 0; i < 10; i++) {
+        if (c3[i] == 1) {
+            c4[i] = 0;
+        }
+        else {
+            c4[i] = 1;
+            m++;
+        }
+    }
+    int array[m];
+    printf("!((C/A) U (A/B)): ");
+    for (int i = 0; i < 10; i++) {
+        if (c4[i] == 1) {
+            printf("%d ", i + 1);
+            array[k] = i + 1;
+            k++;
+        }
+    }
+
+    int length = sizeof(array) / sizeof(array[0]);
+    int power = pow(2, length);
+    printf("\nYour power of array is: %d\n", power);
+    printf("PowerSet  is: ");
+    printPowerSet(array, length);
+}
+
+
